@@ -70,5 +70,4 @@ A *toptags* mezőben lévő *tag* listában lévő tag-ekből nekünk a **name**
 ### 2.) Adat tárolása
 
 #### Adatbázis séma
-
-
+![adatbázis_séma](https://github.com/Cangooroo/Eloadok-klaszterezese/blob/master/img/db_schema.png)
