@@ -46,11 +46,26 @@ Illusztráció (részlet a JSON elejéből):
 ```
 
 A JSON-ben a top level adatszerkezet egy objektum (jelölése: {}).
-Ennek a 'topartists' mezőben található 'artist' mezőben található lista az, ami nekünk kell.
-A listában objektumok vannak, mindegyik objektum az előadóról tárol információkat. Nekünk csak a 'name' mező értéke fontos.
+A *topartists* mezőben lévő *artist* mezőben lévő listában található előadókból nekünk a **name** mező értékére van szükségünk.
 
 #### Top tag-ek lekérdezése
-blabla
+Illusztráció:
+```json
+{
+    "toptags": {
+        "tag": [
+            {
+                "name": "pop",
+                "count": "100",
+                "url": "http://www.last.fm/tag/pop"
+            },
+            {
+                "name": "female vocalists",
+                "count": "72",
+                "url": "http://www.last.fm/tag/female%20vocalists"
+            },
+```
+A *toptags* mezőben lévő *tag* listában lévő tag-ekből nekünk a **name** és a **count** mezők értékére van szükségünk.
 
 ### 2.) Adat tárolása
 
