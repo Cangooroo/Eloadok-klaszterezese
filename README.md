@@ -70,5 +70,5 @@ A *toptags* mezőben lévő *tag* listában lévő tag-ekből nekünk a **name**
 ### 2.) Adat tárolása
 
 #### Adatbázis séma
-blabla
+
 
