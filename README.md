@@ -76,5 +76,5 @@ Az adatokat SQLite adatbázisban tároljuk, és az *SQLAlchemy* modullal érjük
 ![adatbázis_séma](https://github.com/Cangooroo/Eloadok-klaszterezese/blob/master/img/db_schema.png)
 
 ### Egyéb megjegyzések
-A szkript futtatásához Python3-ra van szükség. Ezen felül szükséges kiegészítő csomagok: *httplib2*, *sqlalchemy*.
+A szkript futtatásához [Python3](https://www.python.org/downloads/)-ra van szükség. Ezen felül szükséges kiegészítő csomagok: *httplib2*, *sqlalchemy*.
 Ezek telepíthetők a python hivatalos csomagkezelőjével, a [pip-pel](https://pypi.python.org/pypi).
