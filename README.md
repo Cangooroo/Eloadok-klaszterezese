@@ -77,4 +77,4 @@ Az adatokat SQLite adatbázisban tároljuk, és az *SQLAlchemy* modullal érjük
 
 ### Egyéb megjegyzések
 A szkript futtatásához [Python3](https://www.python.org/downloads/)-ra van szükség. Ezen felül szükséges kiegészítő csomagok: *httplib2*, *sqlalchemy*.
-Ezek telepíthetők a python hivatalos csomagkezelőjével, a [pip-pel](https://pypi.python.org/pypi).
+Ezek telepíthetők a python hivatalos csomagkezelőjével, a [pip](https://pypi.python.org/pypi)-pel.
