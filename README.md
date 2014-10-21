@@ -75,6 +75,10 @@ Az adatokat SQLite adatbázisban tároljuk, és az *SQLAlchemy* modullal érjük
 #### Adatbázis séma
 ![adatbázis_séma](https://github.com/Cangooroo/Eloadok-klaszterezese/blob/master/img/db_schema.png)
 
+### A szkript használata
+A globális változóknál van egy USER változó. Annak kell beállítani a last.fm felhasználó nevet, majd futtatni a szkriptet.
+A LIMIT változóval beállítható, hogy a top előadók közül maximum hányat kérjen le.
+
 ### Egyéb megjegyzések
 A szkript futtatásához [Python3](https://www.python.org/downloads/)-ra van szükség. Ezen felül szükséges kiegészítő csomagok: *httplib2*, *sqlalchemy*.
 Ezek telepíthetők a python hivatalos csomagkezelőjével, a [pip](https://pypi.python.org/pypi)-pel.

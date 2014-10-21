@@ -20,7 +20,7 @@ USER = 'Cangooroo'
 BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
 API_KEY = '39431f9f072f751be8f9477ba1411442'
 FORMAT = 'json'
-LIMIT = 6
+LIMIT = 200
 
 # ---------------
 
