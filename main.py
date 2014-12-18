@@ -9,11 +9,12 @@ import urllib
 import httplib2
 
 # Adatbázis model
+from numpy.ma.core import _minimum_operation
 import model
 
 import numpy as np
 
-from scipy.cluster.vq import kmeans, vq
+from scipy.cluster.vq import kmeans, kmeans2, vq
 
 
 # --------------- Globális változók a kényelem érdekében
@@ -199,18 +200,19 @@ def save_tags(artist_name, tags, session):
 def create_vectors(artist, session):
     tags = session.query(model.Tag).filter(model.Tag.artist_id == artist.id)
 
-    ds = ['DRUM AND BASS',
-            'ROCK',
-            'PUNK',
-            'HIP-HOP',
-            'RAP',
-            'DUBSTEP',
-            'ELECTRONIC',
-            'INDIE',
-            'SOUL',
-            'POP',
-            'RNB',
-            'FUNK',
+    ds = [
+        'DRUM AND BASS',
+        'ROCK',
+        'PUNK',
+        'HIP-HOP',
+        'RAP',
+        'DUBSTEP',
+        'ELECTRONIC',
+        'INDIE',
+        'SOUL',
+        'POP',
+        'RNB',
+        'FUNK',
         ]
 
     printit = False
@@ -296,7 +298,7 @@ def compute(session):
         in_raw_data = []
 
         for artist_vector in artist_vectors:
-            in_raw_data.append(np.array([
+            row = np.array([
                 artist_vector.drum_and_bass,
                 artist_vector.rock,
                 artist_vector.punk,
@@ -310,19 +312,44 @@ def compute(session):
                 artist_vector.rnb,
                 artist_vector.nu_metal,
                 artist_vector.funk
-            ]))
+            ])
+            in_raw_data.append(row)
 
         data = np.vstack(in_raw_data)
 
-        centers, _ = kmeans(data, 26, iter=40)
+        initial_centorids = np.vstack([
+            np.array([100,0,0,0,0,0,0,0,0,0,0,0,0]),
+            np.array([0,100,0,0,0,0,0,0,0,0,0,0,0]),
+            np.array([0,0,100,0,0,0,0,0,0,0,0,0,0]),
+            np.array([0,0,0,100,0,0,0,0,0,0,0,0,0]),
+            np.array([0,0,0,0,100,0,0,0,0,0,0,0,0]),
+            np.array([0,0,0,0,0,100,0,0,0,0,0,0,0]),
+            np.array([0,0,0,0,0,0,100,0,0,0,0,0,0]),
+            np.array([0,0,0,0,0,0,0,100,0,0,0,0,0]),
+            np.array([0,0,0,0,0,0,0,0,100,0,0,0,0]),
+            np.array([0,0,0,0,0,0,0,0,0,100,0,0,0]),
+            np.array([0,0,0,0,0,0,0,0,0,0,100,0,0]),
+            np.array([0,0,0,0,0,0,0,0,0,0,0,100,0]),
+            np.array([0,0,0,0,0,0,0,0,0,0,0,0,100]),
+        ])
+
+        centers, _ = kmeans(data, 26)
         clusters, _ = vq(data, centers)
+
+        # for i, d in enumerate(data):
+        #     try:
+        #         artist_name = session.query(model.Artist).get(i+1)
+        #         print(artist_name.name, d)
+        #     except AttributeError:
+        #         print(i, d)
 
         for cluster in range(26):
             for index, cluster2 in enumerate(clusters):
                 if cluster2 == cluster:
                     try:
-                        artist_name = session.query(model.Artist).get(index+1)
-                        print(artist_name.name, '-', cluster2)
+                        artist_vec = session.query(model.ArtistVector).get(index+1)
+                        artist_name = session.query(model.Artist).get(artist_vec.artist_id)
+                        print('({})'.format(index), artist_name.name, '-', cluster2, '\t\t', data[index])
                     except AttributeError:
                         print(index+1, cluster2)
 
